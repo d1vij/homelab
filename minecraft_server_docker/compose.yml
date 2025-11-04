@@ -1,0 +1,29 @@
+services:
+  mc:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft_server
+    pull_policy: always        # use 'always' instead of 'daily'
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+    networks:
+      - mcnet
+
+    ports:
+      - "25565:25565"
+
+    environment:
+      EULA: "TRUE"
+      # Optional extras you can uncomment if needed:
+      # MEMORY: 2G
+      # VERSION: "1.21.1"
+      # TYPE: PAPER
+
+    volumes:
+      - ./data:/data
+
+networks:
+  mcnet:
+    name: mcnet
+
